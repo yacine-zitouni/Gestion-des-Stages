@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>DREFC: Ajouter une stage</title>
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link
+      href="{% static 'img/apple-touch-icon.png' %}"
+      rel="apple-touch-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+
+    <link href=" {% static 'style.css' %}" rel="stylesheet" />
+  </head>
+
+<body>
+
+  <div id="header"></div>
+
+<div id="sidebar"></div>
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Ajouter une stage</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'stages' %}">Stages</a></li>
+          <li class="breadcrumb-item active">Ajouter un stage</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="section">
+      <div class="row  container-md ">
+          <div class=" card  " style="height: max-content;">
+            <div class="card-body">
+              <h5 class="card-title">Ajouter un stage: </h5>
+
+              <form method="POST" action="{% url 'addStage' %}">
+                {% csrf_token %}
+         
+                <div class="row mb-3">
+                  <label  class="col-sm-2 col-form-label">Nom du projet</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="nom" required class="form-control">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Objectif du stage</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="obj" required class="form-control">
+                    </div>
+                  </div>
+  
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Année</label>
+                    <div class="col-sm-10">
+                      <input type="number" name="annee" required class="form-control">
+                    </div>
+                  </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Date de début</label>
+                    <div class="col-sm-10">
+                      <input type="date" name="date" required class="form-control">
+                    </div>
+                  </div>
+              
+              
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Durée (en semaines)</label>
+                    <div class="col-sm-10">
+                      <input type="number" name="duree" required class="form-control">
+                    </div>
+                  </div>
+              
+                  <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Etudiant(s)</label>
+                {% for et in etudiants  %}
+                    <div class="form-check">
+                      <input class="form-check-input"  type="checkbox" name="etudiant" value="{{et.matricule}}"  >
+                      <label class="form-check-label">
+                        {{et.nomEtudiant}} {{et.prenomEtudiant}}
+                       </label>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Type de stage</label>
+                    <div class="col-sm-10">
+                      <select name="type" class="form-select" >
+                        <option selected>---</option>
+                        {% for typ in types %}
+                        <option  value="{{ typ.id }}">{{ typ.désignation }} </option>
+                        {% endfor %}
+                        
+                      </select>
+                    </div>
+                </div>
+                
+                  <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Enseignant</label>
+                    <div class="col-sm-10">
+                      <select required name="ens" class="form-select" >
+                        <option selected>---</option>
+                        {% for ens in enseignants %}
+                        <option  value="{{ ens.matriculeEns}} "> {{ens.nomEnseignant}} </option>
+                        {% endfor %}
+                
+                    </select>
+                    </div>
+                  </div>
+                  
+
+                  <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Entreprise</label>
+                <div class="col-sm-10">
+                  <select name="ent" class="form-select" >
+                    <option selected>---</option>
+                    {% for ent in entreprises %}
+                    <option  value="{{ ent.id }}"> {{ent.nomEntreprise}} </option>
+                    {% endfor %}
+                  </select>
+                </div>
+               </div>
+          
+                  <div class="row mb-3">
+                        <label  class="col-sm-2 col-form-label">Encadreur</label>
+                    <div class="col-sm-10">
+                      <select name="enc" class="form-select" >
+                        <option selected>---</option>
+                        {% for enc in encadreurs %}
+                        <option  value="{{ enc.id }}"> {{enc.nomEncadreur}} </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+              
+                 
+                  <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Note d'encadreur: (si disponible) </label>
+                    <div class="col-sm-10">
+                      <input type="number" name="note" class="form-control">
+                    </div>
+                  </div>
+              
+              
+                </div>
+              
+
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary"> Ajouter une stage</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+      </div>
+    </section>
+
+  </main>
+
+<div id="footer"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="{% static 'render.js' %}"></script>
+  <script src="{% static 'main.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>DREFC</title>
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link
+      href="{% static 'img/apple-touch-icon.png' %}"
+      rel="apple-touch-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <link
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href=" {% static 'style.css' %}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <div id="header"></div>
+    <!-- End Header -->
+
+    <div id="sidebar"></div>
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Tableau de bord</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Tableau de bord</li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="section dashboard">
+        <div class="row">
+          <div class="row">
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+                <div class="card-body">
+                  <h5 class="card-title">Stages</h5>
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                      <i class="bi bi-stack"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{stages}}</h6>
+                    </div>
+                    <div class="mx-auto ">
+                      <a href="{% url 'addStage' %}" class="alert-link">ajouter un stage</a>                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">Etudiants</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                      <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{etudiants}}</h6>
+                    </div>
+                    <div class="mx-auto ">
+                      <a href="{% url 'addEtudiant' %}" class="alert-link">ajouter un etudiant</a>                  </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">Enseignants</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                      <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{enseignants}}</h6>
+                    </div>
+                    <div class="mx-auto ">
+                      <a href="{% url 'addEnseignant' %}" class="alert-link">ajouter un enseignant</a>                  </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">Entreprises</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                      <i class="bi bi-bank2"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{entreprises}}</h6>
+                    </div>
+                    <div class="mx-auto ">
+                      <a href="{% url 'addEntreprise' %}" class="alert-link">ajouter une entreprise</a>                  </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">Encadreurs</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                      <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>{{encadreurs}}</h6>
+                    </div>
+                    <div class="mx-auto ">
+                      <a href="{% url 'addEncadreur' %}" class="alert-link">ajouter un encadreur</a>                  </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          </div>
+        </div>
+<br> <br>
+
+      <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Taux d'évolution du nombre d'organismes ayant reçus des stagiaires PFE.</h5>
+        <canvas id="myChart"  style="width:100%;max-width:700px"></canvas>
+
+        </div>
+        </div>
+        </div>
+
+<br> <br> <br>
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Répartition des PFE par Entreprise</h5>
+        <table class="table datatable">
+          <thead>
+            <tr>
+              <th scope="col"> Nom de l'entreprise</th>
+              <th scope="col">PFE</th>
+              <th scope="col">Année</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for stage in data %}
+            <tr>
+              <th scope="row"> &nbsp; {{stage.entreprise.nomEntreprise}} </th>
+              <td>{{stage.nomProjet}}</td>
+              <td>{{stage.annee}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+      </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+    <script src="{% static 'render.js' %}"></script>
+
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    
+    <script src=" {% static 'main.js' %}"></script>
+  </body>
+</html>

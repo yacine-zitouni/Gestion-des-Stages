@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Liste des stages</title>
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link
+      href="{% static 'img/apple-touch-icon.png' %}"
+      rel="apple-touch-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <!-- Template Main CSS File -->
+    <link href=" {% static 'style.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- ======= Header ======= -->
+<div id="header"></div>
+    <!-- End Header -->
+
+<div id="sidebar"></div>
+    <!-- End Sidebar-->
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Liste de stages</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">Stages</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+
+      <section class="section">
+        <div class="input-group">
+          <form class="d-flex " action=" {% url 'stages' %} " method="get">
+            <input type="search" name="recherche" class="form-control rounded"  placeholder="Rechercher" aria-label="Search" aria-describedby="search-addon" />
+            <button type="submit" class="btn btn-outline-primary">search</button>
+          </form>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title ">Stages</h5>
+     
+
+                <table class="table datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col"> #</th>     
+                      <th scope="col">Nom de projet </th>
+                      <th scope="col"> Stagiers</th>
+                      <th scope="col"> Année </th>
+                      <th scope="col"> Date de début</th>
+                      <th scope="col"> Durée</th>
+                      <th scope="col"> Type du stage</th>
+                      <th scope="col"> Enseignant</th>
+                      <th scope="col"> Entreprise</th>
+                      <th scope="col"> Encadreur </th>
+                      <th scope="col"> Note (/20) </th>                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for stage in data %}
+                    <tr>
+                      <th scope="row"> {{ stage.id }} </th>
+                      <td >{{stage.nomProjet}} </td>
+                      <td>  {% for et in stage.etudiants.all %}
+                          <a class="link " href="{% url 'etudiant' et.matricule %}">  {{et.nomEtudiant}} {{et.prenomEtudiant}}. </a>
+                          {% endfor %}
+                      </td>
+                      <td>{{stage.annee}}</td>
+                      <td>{{stage.dateDeb}}  </td>
+                      <td> {{stage.dureeReel}} </td>
+                      <td>{{stage.type.désignation}}</td>
+                      <td>
+                        <a class="link " href="{% url 'enseignant' stage.enseignant.matriculeEns %}"> 
+                          {{stage.enseignant.nomEnseignant}} {{stage.enseignant.prenomEnseignant }} </a>
+                      </td>
+                      <td>   <a class="link " href="{% url 'entreprise' stage.entreprise.id %}"> 
+                        {{stage.entreprise.nomEntreprise }}</td> </a>
+                      <td> <a class="link " href="{% url 'encadreur' stage.encadreur.id %}"> 
+                        {{stage.encadreur.nomEncadreur}} {{stage.encadreur.prenomEncadreur }} </a></td>
+                      <td>{{stage.noteEvaluation}}</td>          
+                      <td>
+                        <a class="link-dark" href="{% url 'stage' stage.id %}"> modifier</a> <strong>|</strong>
+                        <a class="link-danger" href="{% url 'stageRm' stage.id %}"> Supprimer</a> 
+                      </td>          
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- End #main -->
+
+    <div id="footer"></div>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+ <script src="{% static 'render.js' %}"></script>
+    <script src="{% static 'main.js' %}"></script>
+  </body>
+</html>

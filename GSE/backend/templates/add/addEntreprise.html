@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>DREFC: Ajouter une entreprise</title>
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link
+      href="{% static 'img/apple-touch-icon.png' %}"
+      rel="apple-touch-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+
+    <link href=" {% static 'style.css' %}" rel="stylesheet" />
+  </head>
+
+<body>
+
+  <div id="header"></div>
+
+<div id="sidebar"></div>
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Ajouter une entreprise</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'entreprises' %}">Entreprises</a></li>
+          <li class="breadcrumb-item active">Ajouter une entreprise</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="section">
+      <div class="row  container-md ">
+          <div class=" card  ">
+            <div class="card-body">
+              <h5 class="card-title">Ajouter une entreprise: </h5>
+              {% if msg  %}
+              <div class="alert alert-success"  role="alert">
+                {{msg}}
+             </div>
+              {% endif %}
+              <form method="POST" action="{% url 'addEntreprise' %}">
+                {% csrf_token %}
+         
+                <div class="row mb-3">
+                  <label  class="col-sm-2 col-form-label">Nom de l'entreprise</label>
+                  <div class="col-sm-10">
+                    <input type="text" required name="nom" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label  class="col-sm-2 col-form-label">Secteur d'activité</label>
+                  <div class="col-sm-10">
+                    <input type="text" required name="secteur" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Adresse</label>
+                    <div class="col-sm-10">
+                      <input type="text" required name="adr" class="form-control">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email"  name="email" class="form-control">
+                    </div>
+                  </div>
+              
+                       
+                <div class="row mb-3">
+                  <label  class="col-sm-2 col-form-label">Telephone</label>
+                  <div class="col-sm-10">
+                    <input type="tel" name="tel" class="form-control">
+                  </div>
+                </div>
+            
+                <div class="row mb-3">
+                  <label  class="col-sm-2 col-form-label">site-web</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="siteweb" class="form-control">
+                  </div>
+                </div>
+              </div>
+              </div>
+            
+
+                </div>
+         
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label"></label>
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary"> Ajouter une entreprise</button>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+      </div>
+    </section>
+
+  </main>
+
+<div id="footer"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="{% static 'render.js' %}"></script>
+  <script src="{% static 'main.js' %}"></script>
+
+</body>
+
+</html>
